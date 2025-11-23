@@ -4,6 +4,7 @@ from sklearn.metrics import r2_score, mean_squared_error
 from tensorflow import keras
 import tensorflow as tf
 
+'''
 # GPU 설정
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
@@ -15,14 +16,12 @@ if gpus:
         print(e)
 else:
     print("❌ GPU를 인식하지 못했습니다.")
+'''
 
 # 데이터 불러오기
 df = pd.read_csv('Mental_Health_and_Social_Media_Balance_Dataset.csv')
 
-x = df[['Daily_Screen_Time(hrs)']]
-#x = df[['Daily_Screen_Time(hrs)','Stress_Level(1-10)']]
-#x = df[['Daily_Screen_Time(hrs)','Stress_Level(1-10)', 'Sleep_Quality(1-10)']]
-
+X = df[['Daily_Screen_Time(hrs)','Stress_Level(1-10)', 'Sleep_Quality(1-10)']]
 y = df['Happiness_Index(1-10)']
 
 # 데이터 표준화
@@ -62,4 +61,5 @@ print(f"평균제곱오차(MSE): {mse:.4f}")
 # 파일명에 성능 포함하여 저장 (매번 새로운 파일 생성)
 filename = f"my_model_R2_{r2:.4f}_MSE_{mse:.4f}.keras"
 model.save(filename)
+
 print(f"✅ 모델 저장 완료: {filename}")
